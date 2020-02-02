@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for FullSpider project
+# Scrapy settings for spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,22 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-import sys , os , django
+BOT_NAME = 'spiderSettings'
 
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "..",'webdata'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'webdata.settings'
+SPIDER_MODULES = ['newsCrawler']
+NEWSPIDER_MODULE = 'newsCrawlers'
 
-django.setup()
-
-BOT_NAME = 'FullSpider'
-
-SPIDER_MODULES = ['spiders']
-NEWSPIDER_MODULE = 'spiders'
-
-# SQLITE_DB_NAME = 'scrapy.db'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'FullSpider (+http://www.yourdomain.com)'
+#USER_AGENT = 'spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -55,13 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'FullSpider.middlewares.FullspiderSpiderMiddleware': 543,
+#    'spider.middlewares.SpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'FullSpider.middlewares.FullspiderDownloaderMiddleware': 543,
+#    'spider.middlewares.SpiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -73,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'FullSpider.pipelines.FullspiderPipeline': 300,
+   'spider.pipelines.SpiderPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

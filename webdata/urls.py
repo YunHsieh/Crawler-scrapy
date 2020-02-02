@@ -11,4 +11,5 @@ from webdata.views import *
 urlpatterns = [
     url(r'^index/' , index.as_view() , name = 'index'),
     url(r'^news/api/(?P<news_name>\w{1,30})/$' , news_api.as_view() , name = 'APIs'),
+    url(r'^spider_test/$' , scrapy_test.as_view() , name = 'APIs'),
 ] 

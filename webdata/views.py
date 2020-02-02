@@ -9,7 +9,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
-from tools.models import cr_nba
+from core.models import row_news
 from django.db import connection
 
 import os
@@ -18,6 +18,9 @@ import subprocess
 # import sqlite3
 import pandas as pd
 import re
+
+from spider.newsCrawler.nba import NBASpider
+from core.scrapy_run import run_scrapy
 
 
 class index(APIView):
@@ -29,7 +32,7 @@ class index(APIView):
 
 class news_api(APIView):
 	def __init__(self):
-		self.cr_nba_content = cr_nba.objects.values().order_by('datetime').reverse()
+		self.cr_nba_content = row_news.objects.values().order_by('datetime').reverse()
 		self.ALL_TABLES = connection.introspection.table_names()
 		self.ALL_TABLES = [re.sub(r'tools_(.*)',r'\1',_table) for _table in list(self.ALL_TABLES) if re.search(r'(tools.*)',_table)]
 
@@ -38,3 +41,11 @@ class news_api(APIView):
 			return JsonResponse(list(self.cr_nba_content), safe=False)
 		else:
 			return HttpResponse("<h1>%s</h1>" % ("Not found data"))
+
+class scrapy_test(APIView):
+	def __init__(self):
+		pass
+
+	def post(self , request,*args,**kwargs):
+		run_scrapy(NBASpider)
+		print('finished')

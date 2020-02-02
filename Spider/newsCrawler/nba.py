@@ -8,7 +8,7 @@ Author : Jerry Hsieh
 import scrapy
 import logging
 from scrapy.http import FormRequest
-from Spider.FullSpider.items import FullspiderItem
+from spider.spiderSettings.items import SpiderItem
 from datetime import datetime
 
 class NBASpider(scrapy.Spider):

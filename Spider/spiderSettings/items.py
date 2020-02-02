@@ -7,8 +7,11 @@
 
 import scrapy
 from scrapy_djangoitem import DjangoItem
+from core.models import row_news
 
-from tools.models import cr_nba
-
-class FullspiderItem(DjangoItem):
-    django_model = cr_nba
+# call model meta 
+class SpiderItem(DjangoItem):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    django_model = row_news
+    pass

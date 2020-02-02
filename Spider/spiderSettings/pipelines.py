@@ -6,7 +6,6 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-class FullspiderPipeline(object):
-	def process_item(self, item, spider):
-		item.save()
-		return item
+class SpiderPipeline(object):
+    def process_item(self, item, spider):
+        return item
