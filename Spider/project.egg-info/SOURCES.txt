@@ -1,0 +1,14 @@
+setup.py
+newsCrawler/__init__.py
+newsCrawler/config.py
+newsCrawler/nba.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
+spiderSettings/__init__.py
+spiderSettings/items.py
+spiderSettings/middlewares.py
+spiderSettings/pipelines.py
+spiderSettings/settings.py

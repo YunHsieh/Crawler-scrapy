@@ -45,7 +45,7 @@ class NBASpider(scrapy.Spider):
 		title_info = response.xpath('//h1[@class="story_art_title"]//text()').extract()
 		
 
-		item = SpiderItem()
+		item = FullspiderItem()
 		item['id'] = response.url.split('/')[-1]
 		item['title'] = title_info[0]
 		item['datetime'] = basic_info[0]

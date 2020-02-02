@@ -49,3 +49,4 @@ class scrapy_test(APIView):
 	def post(self , request,*args,**kwargs):
 		run_scrapy(NBASpider)
 		print('finished')
+		return HttpResponse("Succeed")

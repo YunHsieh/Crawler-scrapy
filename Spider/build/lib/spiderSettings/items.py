@@ -11,9 +11,7 @@ import scrapy
 
 # call model meta 
 class SpiderItem(scrapy.Item):
-	id = scrapy.Field()
-	title = scrapy.Field()
-	datetime = scrapy.Field()
-	author = scrapy.Field()
-	content = scrapy.Field()
-	url = scrapy.Field()
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    # django_model = row_news
+    pass
