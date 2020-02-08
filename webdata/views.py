@@ -19,9 +19,7 @@ import subprocess
 import pandas as pd
 import re
 
-from spider.newsCrawler.nba import NBASpider
-from core.scrapy_run import run_scrapy
-
+from scrapyd_api import ScrapydAPI
 
 class index(APIView):
 	def __init__(self):
@@ -44,9 +42,21 @@ class news_api(APIView):
 
 class scrapy_test(APIView):
 	def __init__(self):
-		pass
+		self.scrapyd = ScrapydAPI('http://localhost:6800')
+		self.dist_path = os.path.join(os.path.abspath(os.getcwd()),'dist')
+
 
 	def post(self , request,*args,**kwargs):
-		run_scrapy(NBASpider)
-		print('finished')
+
+		scrapy_settings = {
+			"FEED_URI" : "file:" + os.path.join(self.dist_path, request.POST.get('spider_name','')) + ".json"
+		}
+		
+		job_id = self.scrapyd.schedule(request.POST.get('project_name',''), 
+			request.POST.get('spider_name',''),
+			settings = scrapy_settings)
+		# scrapyd.list_jobs('project_name')
+		# run_scrapy(NBASpider)
+
+		print(job_id)
 		return HttpResponse("Succeed")

@@ -7,5 +7,10 @@
 
 
 class SpiderPipeline(object):
-    def process_item(self, item, spider):
-        return item
+	def process_item(self, item, spider):
+		item.setdefault('shortened_title', '')
+		item.setdefault('author', '')
+		item.setdefault('images', '')
+		item.setdefault('category', '')
+		item.setdefault('keywords', '')
+		return item

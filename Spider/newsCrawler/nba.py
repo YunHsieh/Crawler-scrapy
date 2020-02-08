@@ -28,10 +28,11 @@ class NBASpider(scrapy.Spider):
 			yield scrapy.Request(url, callback=self.parse_post)
 
 		self._pages += 1
-		if self._pages < NBASpider.MAX_PAGES:
+		if self._pages <= NBASpider.MAX_PAGES:
+			# get next page way
 			next_page = response.xpath('//gonext/a[@data-id="right"]/@href')
 			if next_page:
-				url = response.urljoin(next_page[0].extract())
+				url = response.urljoin(next_page.extract()[0])
 				logging.warning('follow {}'.format(url))
 				yield scrapy.Request(url, self.parse)
 			else:
@@ -42,15 +43,14 @@ class NBASpider(scrapy.Spider):
 	def parse_post(self, response):
 		article_contant = response.xpath('//div[@id="story_body_content"]/span/p//text()').extract()
 		basic_info = response.xpath('//div[@class="shareBar__info--author"]//text()').extract()
-		title_info = response.xpath('//h1[@class="story_art_title"]//text()').extract()
+		title_info = response.xpath('//h1[@class="story_art_title"]//text()').extract_first()
 		
-
 		item = SpiderItem()
 		item['id'] = response.url.split('/')[-1]
-		item['title'] = title_info[0]
-		item['datetime'] = basic_info[0]
+		item['url'] = response.url
+		item['title'] = title_info
 		item['author'] = basic_info[1]
 		item['content'] = ''.join(article_contant)
-		item['url'] = response.url
+		item['datetime'] = datetime.strptime(basic_info[0], "%Y-%m-%d %H:%M")
 			# return event
 		yield item

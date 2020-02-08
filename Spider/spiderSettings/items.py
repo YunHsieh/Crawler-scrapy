@@ -10,10 +10,16 @@ import scrapy
 # from core.models import row_news
 
 # call model meta 
+# default empty set in pipelines.py file.
 class SpiderItem(scrapy.Item):
 	id = scrapy.Field()
-	title = scrapy.Field()
-	datetime = scrapy.Field()
-	author = scrapy.Field()
-	content = scrapy.Field()
 	url = scrapy.Field()
+	title = scrapy.Field()
+	news_name = scrapy.Field()
+	shortened_title = scrapy.Field() # default empty
+	author = scrapy.Field() # default empty
+	content = scrapy.Field()
+	images = scrapy.Field() # default emptys
+	datetime = scrapy.Field()
+	category = scrapy.Field() # default empty
+	keywords = scrapy.Field() # default empty
