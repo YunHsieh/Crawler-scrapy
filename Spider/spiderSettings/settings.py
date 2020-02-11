@@ -68,6 +68,11 @@ ITEM_PIPELINES = {
    'spiderSettings.pipelines.SpiderPipeline': 300,
 }
 
+FEED_STORAGES_BASE = {
+    '': 'spiderSettings.customexport.CustomFileFeedStorage',
+    'file': 'spiderSettings.customexport.CustomFileFeedStorage',
+}
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

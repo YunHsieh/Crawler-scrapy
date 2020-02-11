@@ -18,6 +18,10 @@ import subprocess
 # import sqlite3
 import pandas as pd
 import re
+import time
+
+from core.models import *
+from webdata.serializers import *	
 
 from scrapyd_api import ScrapydAPI
 
@@ -45,18 +49,29 @@ class scrapy_test(APIView):
 		self.scrapyd = ScrapydAPI('http://localhost:6800')
 		self.dist_path = os.path.join(os.path.abspath(os.getcwd()),'dist')
 
-
 	def post(self , request,*args,**kwargs):
-
+		project_name = request.POST.get('project_name','')
+		spider_name = request.POST.get('spider_name','')
 		scrapy_settings = {
-			"FEED_URI" : "file:" + os.path.join(self.dist_path, request.POST.get('spider_name','')) + ".json"
+			"FEED_URI" : "file:" + os.path.join(self.dist_path, spider_name) + ".json",
+			'FEED_FORMAT' : "json"
 		}
-		
-		job_id = self.scrapyd.schedule(request.POST.get('project_name',''), 
-			request.POST.get('spider_name',''),
+		job_id = self.scrapyd.schedule(project_name, 
+			spider_name,
 			settings = scrapy_settings)
-		# scrapyd.list_jobs('project_name')
-		# run_scrapy(NBASpider)
+
+		# waiting the schedule runing finished
+		while self.scrapyd.job_status(project_name, job_id) != 'finished':
+			print(self.scrapyd.job_status(project_name, job_id))
+			time.sleep(3)
+
+		with open(os.path.join('.','dist',spider_name+'.json'),'r+') as _f:
+			crawl_data = json.load(_f)
+		serializer = CrawlerSerializers(data=crawl_data, context=request, many=True)
+		
+		if not serializer.is_valid():
+			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+		instance = serializer.save()
 
 		print(job_id)
 		return HttpResponse("Succeed")

@@ -1,7 +1,9 @@
 setup.py
 newsCrawler/__init__.py
 newsCrawler/config.py
+newsCrawler/ettoday.py
 newsCrawler/nba.py
+newsCrawler/setn.py
 project.egg-info/PKG-INFO
 project.egg-info/SOURCES.txt
 project.egg-info/dependency_links.txt

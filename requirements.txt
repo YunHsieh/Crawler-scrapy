@@ -11,3 +11,7 @@ requests==2.19.1
 Scrapy==1.6.0
 scrapyrt==0.10
 Twisted==19.2.1
+python-scrapyd-api
+scrapyd
+scrapy-client
+

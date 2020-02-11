@@ -6,3 +6,6 @@ NEWS_CONFIG['nba']['allowed_domains'] = [
 NEWS_CONFIG['nba']['start_url'] = (
 	'https://nba.udn.com/nba/news/',
 	)
+NEWS_CONFIG['nba']['start_url'] = (
+	'https://nba.udn.com/nba/news/',
+	)

@@ -4,13 +4,21 @@ import uuid
 
 class row_news(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
-	source = models.CharField(max_length=50) # news name
+	news_name = models.CharField(max_length=50) # news name
 	url = models.TextField()
 	news_no = models.CharField(max_length=50)
 	title = models.TextField()
-	datetime = models.DateTimeField(auto_now=True)
-	author = models.TextField(null=True)
 	content = models.TextField()
+	datetime = models.DateTimeField()
+	author = models.TextField(null=True, blank=True)
+	shortened_title = models.CharField(max_length=100, null=True, blank=True)
+	images = models.TextField(null=True, blank=True)
+	category = models.CharField(max_length=10)
+	keywords = models.CharField(max_length=100, null=True, blank=True)
+
+	class Meta:
+		unique_together = (('news_name','news_no'))
+	
 
 # class row_picture(models.Model):
 # 	id = models.AutoField(unique=True)

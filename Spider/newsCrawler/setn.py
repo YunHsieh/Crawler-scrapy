@@ -18,7 +18,7 @@ class SetnSpider(scrapy.Spider):
 	start_urls = ('https://www.setn.com/ViewAll.aspx?p=1', )
 
 	news_datetime_format = "%Y-%m-%d %H:%M:%S"
-	
+
 	_retries = 0
 	MAX_RETRY = 1
 
@@ -57,8 +57,8 @@ class SetnSpider(scrapy.Spider):
 		category = response.xpath('//meta[@property="article:section"]/@content').extract_first()
 		
 		item = response.meta['item']
-		item['id'] = re.sub(r'.*NewsID=(\d+)',r'\1',response.url)
-		item['news_name'] = name
+		item['news_no'] = re.sub(r'.*NewsID=(\d+)',r'\1',response.url)
+		item['news_name'] = SetnSpider.name
 		item['url'] = response.url
 		item['title'] = title_info
 		item['author'] = author
