@@ -73,5 +73,4 @@ class scrapy_test(APIView):
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 		instance = serializer.save()
 
-		print(job_id)
 		return HttpResponse("Succeed")
