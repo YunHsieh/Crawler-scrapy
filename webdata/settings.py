@@ -74,6 +74,7 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# db name mediator
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

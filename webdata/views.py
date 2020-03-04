@@ -65,10 +65,12 @@ class scrapy_test(APIView):
 			print(self.scrapyd.job_status(project_name, job_id))
 			time.sleep(3)
 
+		# read spider data
 		with open(os.path.join('.','dist',spider_name+'.json'),'r+') as _f:
 			crawl_data = json.load(_f)
+
+		# insert data
 		serializer = CrawlerSerializers(data=crawl_data, context=request, many=True)
-		
 		if not serializer.is_valid():
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 		instance = serializer.save()
