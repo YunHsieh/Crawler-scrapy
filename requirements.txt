@@ -10,7 +10,7 @@ redis==2.10.6
 requests==2.19.1
 Scrapy==1.6.0
 scrapyrt==0.10
-Twisted==19.2.1
+Twisted==22.1.0
 python-scrapyd-api
 scrapyd
 scrapy-client
