@@ -8,7 +8,7 @@ pypiwin32==223
 pywin32==224
 redis==2.10.6
 requests==2.19.1
-Scrapy==1.6.0
+Scrapy==2.6.1
 scrapyrt==0.10
 Twisted==19.2.1
 python-scrapyd-api
